@@ -11,7 +11,7 @@ Sistema de gerenciamento de imóveis e cômodos.
 
 ### Trabalho realizado por:
 
-- Felipe Cesar Tomazoti de Souza - RA: 22019977-2
+- Felipe Cesar Tomazoti de Souza
 
 #
 ### Programa Necessário
