@@ -65,9 +65,11 @@ export class ImoveisService {
 
 		if (Array.isArray(comodos)) {
 			if (comodos.length > 0) {
-				comodos.map(
-					async (e: number) =>
-						await this.comodoRepository.update(e, { imovelId: id })
+				await Promise.all(
+					comodos.map(
+						async (e: number) =>
+							await this.comodoRepository.update(e, { imovelId: id })
+					)
 				)
 			}
 		}
@@ -80,14 +82,16 @@ export class ImoveisService {
 
 		if (Array.isArray(comodos)) {
 			if (comodos.length > 0) {
-				comodos.map(
-					async (e: number) =>
-						await this.comodoRepository.update(
-							{ id: e, imovelId: id },
-							{
-								imovelId: null
-							}
-						)
+				await Promise.all(
+					comodos.map(
+						async (e: number) =>
+							await this.comodoRepository.update(
+								{ id: e, imovelId: id },
+								{
+									imovelId: null
+								}
+							)
+					)
 				)
 			}
 		}
@@ -96,7 +100,11 @@ export class ImoveisService {
 	}
 
 	async remove(id: number) {
-		await this.comodoRepository.delete({ imovelId: id })
+		await this.comodoRepository.update(
+			{ imovelId: id },
+			{ imovelId: null }
+		)
+		
 		await this.imovelRepository.delete(id)
 	}
 }
